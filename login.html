@@ -81,58 +81,53 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
   <script>
-  const auth = firebase.auth();
+    // 🔥 Replace with your Firebase config (from Firebase Console → Project Settings → SDK setup)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-  // Setup reCAPTCHA verifier
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('send-otp-btn', {
-    'size': 'invisible',
-    'callback': function(response) {
-      // reCAPTCHA solved
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Setup reCAPTCHA (required by Firebase for SMS OTP)
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('send-otp-btn', {
+      'size': 'invisible',
+      'callback': function(response) {
+        // reCAPTCHA solved
+      }
+    });
+
+    function sendOTP() {
+      const phoneNumber = document.getElementById('phone').value;
+      const appVerifier = window.recaptchaVerifier;
+
+      auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(confirmationResult => {
+          window.confirmationResult = confirmationResult;
+          alert("OTP sent to " + phoneNumber);
+        })
+        .catch(error => {
+          alert(error.message);
+        });
     }
-  });
 
-  function sendOTP() {
-    const phoneNumber = document.getElementById('phone').value;
-    const appVerifier = window.recaptchaVerifier;
+    function verifyOTP() {
+      const otp = document.getElementById('otp').value;
+      window.confirmationResult.confirm(otp)
+        .then(result => {
+          alert("✅ Login successful! Welcome " + result.user.phoneNumber);
+          // You can redirect user here (example: window.location.href = "index.html")
+        })
+        .catch(error => {
+          alert("❌ Invalid OTP. Try again.");
+        });
+    }
+  </script>
 
-    auth.signInWithPhoneNumber(phoneNumber, appVerifier)
-      .then(confirmationResult => {
-        window.confirmationResult = confirmationResult;
-        alert("OTP sent!");
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-  }
-
-  function verifyOTP() {
-    const otp = document.getElementById('otp').value;
-    window.confirmationResult.confirm(otp)
-      .then(result => {
-        alert("Login successful! Welcome " + result.user.phoneNumber);
-      })
-      .catch(error => {
-        alert("Invalid OTP. Try again.");
-      });
-  }
-</script>
-<!-- Firebase App -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<!-- Firebase Auth -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
-<script>
-  // 🔥 Replace with your Firebase config from console
-  const firebaseConfig = {
-    apiKey: "AIzaSyA0R4wQUte4MzAggd_o_pvGzpkOqNcRcrg",
-    authDomain: "protenzax.firebaseapp.com",
-    projectId: "protenzax",
-    storageBucket: "protenzax.appspot.com",
-    messagingSenderId: "708344401873",
-    appId: "1:708344401873:web:49835af7ca127a14759af0"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-</script>
 </body>
 </html>
