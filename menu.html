@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>ProtenzaX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #FEF7E1;
+      color: #333;
+    }
+    header {
+      padding: 40px 20px;
+      color: #000;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2em;
+    }
+    section {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #444;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      padding: 15px;
+      font-size: 0.9em;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      section {
+        padding: 20px 10px;
+      }
+    }
+
+    /* Hamburger */
+    .menu-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      cursor: pointer;
+      font-size: 28px;
+      background: none;
+      border: none;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 12px 24px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+
+    .sidebar .logout {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+
+    /* Account icon */
+    .account-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 28px;
+      color: black;
+      text-decoration: none;
+    }
+    .account-icon:hover {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Menu button -->
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <!-- Account icon -->
+  <a href="login.html" class="account-icon">
+    <i class="fas fa-user-circle"></i>
+  </a>
+ <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Our Menu</a>
+    <a href="logout.html" class="logout">Log Out</a>
+  </div>
+
+  <header style="background-color: #FEF7C3; text-align: center; padding: 50px 20px; font-family: Arial, sans-serif;">
+    <h1 style="margin: 0; color: #2B5635; font-size: 45px; letter-spacing: 2px;">ProtenzaX</h1>
+    <p style="margin: 10px 0 0; color: #D1433E; font-size: 18px;"><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+  </header>
+  <section id="menu" style="padding: 40px; font-family: Arial, sans-serif; text-align: center;">
+    <h2 style="margin-bottom: 30px; color: #006847;">Our Menu</h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #d52b1e;">Shakes</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Chocolate <span style="float:right;">₹___</span></li>
+          <li>Belgian Chocolate <span style="float:right;">₹___</span></li>
+          <li>Vanilla <span style="float:right;">₹___</span></li>
+          <li>Cookies and Cream <span style="float:right;">₹___</span></li>
+          <li>Banana Oats Shake <span style="float:right;">₹___</span></li>
+          <li>Strawberry Whey <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #009246;">Snacks</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Protein Bar <span style="float:right;">₹___</span></li>
+          <li>Protein Brownie <span style="float:right;">₹___</span></li>
+          <li>Oats Energy Bar <span style="float:right;">₹___</span></li>
+          <li>Peanut Butter Cookies <span style="float:right;">₹___</span></li>
+          <li>Greek Yogurt Bowl <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #000;">Creatines</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Unflavoured <span style="float:right;">₹___</span></li>
+          <li>Fruit Fusion <span style="float:right;">₹___</span></li>
+          <li>Fruit Punch <span style="float:right;">₹___</span></li>
+          <li>Citrus Blast <span style="float:right;">₹___</span></li>
+          <li>Tropical Tango <span style="float:right;">₹___</span></li>
+          <li>Watermelon Kool Aid <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="text-align:center; font-family: Arial, sans-serif;">
+    <h2 style="margin-bottom: 20px;">Contact Us</h2>
+    <p style="margin: 10px 0;">
+      <a href="https://www.instagram.com/protenzax" target="_blank" 
+         style="text-decoration: none; color: #E4405F; font-size: 18px;">
+         <i class="fab fa-instagram"></i> @protenzax
+      </a>
+    </p>
+    <p style="margin: 10px 0;">
+      <a href="mailto:info@protenzax.in" 
+         style="text-decoration: none; color: #25D366; font-size: 18px;">
+         <i class="fas fa-envelope"></i> info@protenzax.in
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 ProtenzaX | All Rights Reserved</p>
+  </footer>
+  
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("mySidebar");
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+      } else {
+        sidebar.style.width = "250px";
+      }
+    }
+  </script>
+</body>
+</html>
