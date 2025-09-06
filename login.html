@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ProtenzaX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FEF7E1;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 320px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2B5635;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #2B5635;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #1f3e25;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="return false;">
+      <input id="phone" type="tel" placeholder="Enter Phone Number (+91...)" required>
+      <button id="send-otp-btn" type="button" onclick="sendOTP()">Send OTP</button>
+
+      <input id="otp" type="text" placeholder="Enter OTP" required>
+      <button type="button" onclick="verifyOTP()">Verify & Login</button>
+    </form>
+    <p class="note">You’ll receive a one-time password (OTP) on your phone.</p>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    // 🔥 Replace with your Firebase config (from Firebase Console → Project Settings → SDK setup)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Setup reCAPTCHA (required by Firebase for SMS OTP)
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('send-otp-btn', {
+      'size': 'invisible',
+      'callback': function(response) {
+        // reCAPTCHA solved
+      }
+    });
+
+    function sendOTP() {
+      const phoneNumber = document.getElementById('phone').value;
+      const appVerifier = window.recaptchaVerifier;
+
+      auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(confirmationResult => {
+          window.confirmationResult = confirmationResult;
+          alert("OTP sent to " + phoneNumber);
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
+
+    function verifyOTP() {
+      const otp = document.getElementById('otp').value;
+      window.confirmationResult.confirm(otp)
+        .then(result => {
+          alert("✅ Login successful! Welcome " + result.user.phoneNumber);
+          // You can redirect user here (example: window.location.href = "index.html")
+        })
+        .catch(error => {
+          alert("❌ Invalid OTP. Try again.");
+        });
+    }
+  </script>
+
+</body>
+</html>
