@@ -100,10 +100,38 @@
   <script>
     function toggleMenu() {
       const sidebar = document.getElementById("mySidebar");
-      if (sidebar.style.width === "250px") {
-        sidebar.style.width = "0";
+      const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
+
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        menuBtn.style.display = "block"; // show ☰ again
       } else {
-        sidebar.style.width = "250px";
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        menuBtn.style.display = "none"; // hide ☰ while sidebar is open
+      }
+    }
+
+    function toggleAccountMenu() {
+      const dropdown = document.getElementById("accountDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logoutUser() {
+      alert("Logged out!");
+      document.getElementById("loginOption").style.display = "block";
+      document.getElementById("logoutOption").style.display = "none";
+    }
+
+    // Close account dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+        const dropdown = document.getElementById("accountDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
       }
     }
   </script>
