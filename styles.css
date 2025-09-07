@@ -1,80 +1,163 @@
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #FEF7C3;
-  padding: 10px 15px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #FEF7E1;
+  color: #333;
 }
 
-.navbar-center a {
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
-  color: #2c5f2d;
-}
-
-/* Tagline strip */
-.tagline-strip {
+/* Header */
+header {
   background-color: #FEF7C3;
   text-align: center;
-  font-size: 12px;
-  font-style: italic;
+  padding: 50px 20px;
+}
+header h1 {
+  margin: 0;
+  color: #2B5635;
+  font-size: 45px;
+  letter-spacing: 2px;
+}
+header p {
+  margin: 10px 0 0;
   color: #D1433E;
-  padding: 2px 0;
-  border-bottom: 1px solid #ddd;
+  font-size: 18px;
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: #111;
-  padding-top: 60px;
-  transition: 0.3s;
+section {
+  padding: 30px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+h2 {
+  color: #444;
+  margin-bottom: 20px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul li {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 15px;
+  font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2em;
+  }
+  section {
+    padding: 20px 10px;
+  }
+}
+
+/* Hamburger */
+.menu-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+  font-size: 28px;
+  background: none;
+  border: none;
   z-index: 1100;
 }
 
-.sidebar a {
-  display: block;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #fff;
+/* Sidebar (slide animation) */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  padding-top: 60px;
+  z-index: 1200;
 }
-
+.sidebar.open {
+  transform: translateX(0);
+}
+.sidebar a {
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
 .sidebar a:hover {
   background-color: #575757;
 }
 
+/* Close button inside sidebar */
 .close-btn {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 24px;
+  font-size: 28px;
   color: white;
-  background: none;
-  border: none;
   cursor: pointer;
 }
 
-/* Content */
-.content {
-  padding: 20px;
-  background-color: #fdf6e3;
-  min-height: calc(100vh - 100px);
+/* Overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1100;
+}
+.overlay.active {
+  display: block;
 }
 
-/* Footer */
-footer {
-  background-color: #111;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
+/* Account dropdown */
+.account-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.account-icon {
+  font-size: 28px;
+  color: black;
+  cursor: pointer;
+}
+.account-icon:hover {
+  color: gray;
+}
+.account-dropdown {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 120px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  z-index: 1300;
+}
+.account-dropdown a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+.account-dropdown a:hover {
+  background: #f4f4f4;
 }
