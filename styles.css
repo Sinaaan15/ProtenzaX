@@ -9,7 +9,7 @@ body {
 
 /* Header */
 header {
-  background-color: #FEF7E1;
+  background-color: #000; /*FEF7E1*/
   text-align: center;
   padding: 50px 20px;
 }
