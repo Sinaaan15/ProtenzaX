@@ -24,17 +24,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 12px 20px;
       z-index: 1000;
       border-bottom: 1px solid #ddd;
     }
 
-    /* Hamburger */
+    /* Menu button */
     .menu-btn {
-      font-size: 28px;
+      font-size: 26px;
       background: none;
       border: none;
       cursor: pointer;
+    }
+
+    /* Brand (ProtenzaX clickable) */
+    .brand {
+      font-size: 22px;
+      color: #2B5635;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .brand:hover {
+      color: #1f3e25;
     }
 
     /* Account icon + dropdown */
@@ -44,7 +56,7 @@
     }
 
     .account-icon {
-      font-size: 28px;
+      font-size: 26px;
       color: black;
       text-decoration: none;
       cursor: pointer;
@@ -113,35 +125,17 @@
       cursor: pointer;
     }
 
-    /* Header (fixed width & height aligned with body) */
+    /* Header below navbar */
     header {
-      background-color: #FEF7C3;
-      padding: 30px 20px;
-      color: #000;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      margin: 0;
-      color: #2B5635;
-    }
-
-    header h1 a {
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    header h1 a:hover {
-      color: #1f3e25;
+      padding: 25px 20px;
+      background-color: #FEF7E1;
+      text-align: center;
+      color: #D1433E;
     }
 
     header p {
-      font-size: 1.2em;
-      color: #D1433E;
-      margin: 10px 0 0;
+      margin: 0;
+      font-size: 1.1em;
     }
 
     section {
@@ -170,14 +164,14 @@
       color: #fff;
       padding: 15px;
       font-size: 0.9em;
-      text-align: center;
-      width: 100%;
-      box-sizing: border-box;
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
+      .brand {
+        font-size: 18px;
+      }
+      header p {
+        font-size: 1em;
       }
       section {
         padding: 20px 10px;
@@ -191,6 +185,9 @@
   <div class="navbar">
     <!-- Menu button -->
     <button class="menu-btn" onclick="openSidebar()">☰</button>
+
+    <!-- Brand clickable -->
+    <a href="index.html" class="brand">ProtenzaX</a>
 
     <!-- Account icon with dropdown -->
     <div class="account-container">
@@ -208,20 +205,17 @@
     <a href="menu.html">Our Menu</a>
   </div>
 
-  <!-- Header -->
+  <!-- Header slogan -->
   <header>
-    <h1><a href="index.html">ProtenzaX</a></h1>
     <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
   </header>
 
-  <!-- About Section -->
   <section>
     <h2>About Us</h2>
     <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
     Fresh, affordable, and made for fitness lovers.</p>
   </section>
 
-  <!-- Why Choose Us -->
   <section>
     <h2>Why Choose Us?</h2>
     <ul>
@@ -232,7 +226,6 @@
     </ul>
   </section>
 
-  <!-- Contact Section -->
   <section id="contact">
     <h2>Contact Us</h2>
     <p>
@@ -249,7 +242,6 @@
     </p>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
@@ -269,14 +261,13 @@
     // Account dropdown
     function toggleDropdown() {
       const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display =
-        dropdown.style.display === "block" ? "none" : "block";
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     }
 
     // Close dropdown if clicked outside
     window.onclick = function(event) {
       if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
-        const dropdown = document.getElementById("accountDropdown");
+        var dropdown = document.getElementById("accountDropdown");
         if (dropdown.style.display === "block") {
           dropdown.style.display = "none";
         }
