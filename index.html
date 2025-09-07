@@ -3,200 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>ProtenzaX</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #FEF7E1;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* Sticky Navbar */
-    .navbar {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      background-color: #FEF7C3;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 20px;
-      z-index: 1000;
-      border-bottom: 1px solid #ddd;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Navbar left (menu) */
-    .menu-btn {
-      font-size: 26px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Navbar center (brand + tagline) */
-    .navbar-center {
-      flex: 1;
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    .navbar-center a {
-      font-size: 20px;
-      font-weight: bold;
-      color: #2B5635;
-      text-decoration: none;
-      display: block;
-    }
-
-    .tagline {
-      font-size: 11px;
-      font-style: italic;
-      color: #D1433E;
-      margin-top: 0;
-    }
-
-    /* Navbar right (account) */
-    .account-container {
-      position: relative;
-      display: inline-block;
-    }
-
-    .account-icon {
-      font-size: 26px;
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .account-icon:hover {
-      color: gray;
-    }
-
-    .account-dropdown {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: white;
-      min-width: 120px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      z-index: 1001;
-    }
-
-    .account-dropdown a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: black;
-    }
-
-    .account-dropdown a:hover {
-      background-color: #f0f0f0;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.4s;
-      padding-top: 60px;
-      z-index: 1002;
-    }
-
-    .sidebar a {
-      padding: 12px 24px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #575757;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 30px;
-      color: white;
-      cursor: pointer;
-    }
-
-    header {
-      padding: 40px 20px;
-      color: #000;
-    }
-
-    section {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #444;
-      margin-bottom: 20px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li {
-      margin: 10px 0;
-      font-size: 1.1em;
-    }
-
-    footer {
-      background: #222;
-      color: #fff;
-      padding: 15px;
-      font-size: 0.9em;
-      margin-top: auto;
-    }
-
-    @media (max-width: 600px) {
-      .navbar-center a {
-        font-size: 18px;
-      }
-      .tagline {
-        font-size: 10px;
-      }
-      section {
-        padding: 20px 10px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
   <!-- Navbar -->
   <div class="navbar">
     <!-- Left: Menu -->
     <button class="menu-btn" onclick="openSidebar()">☰</button>
 
-    <!-- Center: Brand + Tagline -->
+    <!-- Center: Brand -->
     <div class="navbar-center">
       <a href="index.html">ProtenzaX</a>
-      <div class="tagline">Built by Dedication. Fueled by Protein.</div>
     </div>
 
     <!-- Right: Account -->
@@ -208,76 +28,49 @@
     </div>
   </div>
 
-  <!-- Sidebar -->
-  <div id="mySidebar" class="sidebar">
-    <span class="close-btn" onclick="closeSidebar()">&times;</span>
-    <a href="index.html">Home</a>
-    <a href="menu.html">Our Menu</a>
+  <!-- Tagline strip -->
+  <div class="tagline-strip">
+    Built by Dedication. Fueled by Protein.
   </div>
 
-  <header>
-    <h2>About Us</h2>
-    <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
-    Fresh, affordable, and made for fitness lovers.</p>
-  </header>
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">×</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-  <section>
-    <h2>Why Choose Us?</h2>
-    <ul>
-      <li>✅ High Quality Ingredients</li>
-      <li>✅ Perfect for gym-goers</li>
-      <li>✅ Affordable prices</li>
-      <li>✅ Right across your gym</li>
-    </ul>
-  </section>
+  <!-- Main Content -->
+  <div class="content">
+    <section id="about">
+      <h2>About Us</h2>
+      <p>
+        ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym.
+        Fresh, affordable, and made for fitness lovers.
+      </p>
+    </section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>
-      <a href="https://www.instagram.com/protenzax" target="_blank" 
-         style="text-decoration: none; color: #E4405F; font-size: 18px;">
-         <i class="fab fa-instagram"></i> @protenzax
-      </a>
-    </p>
-    <p>
-      <a href="mailto:info@protenzax.in" 
-         style="text-decoration: none; color: #25D366; font-size: 18px;">
-         <i class="fas fa-envelope"></i> info@protenzax.in
-      </a>
-    </p>
-  </section>
+    <section id="why-choose">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>✅ High Quality Ingredients</li>
+        <li>✅ Perfect for gym-goers</li>
+        <li>✅ Affordable prices</li>
+        <li>✅ Right across your gym</li>
+      </ul>
+    </section>
 
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p><i class="fab fa-instagram"></i> @protenzax</p>
+      <p><i class="fas fa-envelope"></i> info@protenzax.in</p>
+    </section>
+  </div>
+
+  <!-- Footer -->
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
-
-  <script>
-    // Sidebar
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.querySelector(".menu-btn").style.display = "none";
-    }
-
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.querySelector(".menu-btn").style.display = "inline-block";
-    }
-
-    // Account dropdown
-    function toggleDropdown() {
-      const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    }
-
-    // Close dropdown if clicked outside
-    window.onclick = function(event) {
-      if (!event.target.matches('.account-icon')) {
-        var dropdown = document.getElementById("accountDropdown");
-        if (dropdown && dropdown.style.display === "block") {
-          dropdown.style.display = "none";
-        }
-      }
-    }
-  </script>
 </body>
 </html>
