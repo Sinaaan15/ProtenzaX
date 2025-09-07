@@ -9,19 +9,19 @@ body {
 
 /* Header */
 header {
-  background-color: #FEF7E1;
+  background-color: #F4F5F0; /*FEF7E1*/
   text-align: center;
   padding: 50px 20px;
 }
 header h1 {
   margin: 0;
-  color: #2B5635;
+  color: #008C45;
   font-size: 45px;
   letter-spacing: 2px;
 }
 header p {
   margin: 10px 0 0;
-  color: #D1433E;
+  color: #CD212A;
   font-size: 18px;
 }
 
