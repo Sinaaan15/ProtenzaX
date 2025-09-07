@@ -3,23 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>ProtenzaX</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  
   <!-- Menu button -->
   <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
-
-  <!-- Account icon with dropdown -->
-  <div class="account-container">
-    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
-    <div id="accountDropdown" class="account-dropdown">
-      <a href="login.html" id="loginOption">Login</a>
-      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
-    </div>
-  </div>
 
   <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
@@ -31,11 +21,22 @@
   <!-- Overlay -->
   <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
-  <header>
-    <h1>ProtenzaX</h1>
-    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+  <!-- Sticky header -->
+  <header class="main-header">
+    <a href="index.html" class="brand">ProtenzaX</a>
+    <p class="tagline"><i>Built by Dedication. Fueled by Protein.</i></p>
+
+    <!-- Account icon with dropdown -->
+    <div class="account-container">
+      <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+      <div id="accountDropdown" class="account-dropdown">
+        <a href="login.html" id="loginOption">Login</a>
+        <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
+      </div>
+    </div>
   </header>
 
+  <!-- Content -->
   <section>
     <h2>About Us</h2>
     <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
@@ -55,13 +56,13 @@
   <section id="contact">
     <h2>Contact Us</h2>
     <p>
-      <a href="https://www.instagram.com/protenzax" target="_blank">
-         <i class="fab fa-instagram"></i> @protenzax
+      <a href="https://www.instagram.com/protenzax" target="_blank" class="instagram">
+        <i class="fab fa-instagram"></i> @protenzax
       </a>
     </p>
     <p>
-      <a href="mailto:info@protenzax.in">
-         <i class="fas fa-envelope"></i> info@protenzax.in
+      <a href="mailto:info@protenzax.in" class="email">
+        <i class="fas fa-envelope"></i> info@protenzax.in
       </a>
     </p>
   </section>
@@ -69,7 +70,7 @@
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
-  
+
   <script>
     function toggleMenu() {
       const sidebar = document.getElementById("mySidebar");
