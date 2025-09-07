@@ -69,18 +69,22 @@
       z-index: 1100;
     }
 
-    /* Sidebar */
+    /* Sidebar (slide animation) */
     .sidebar {
       height: 100%;
-      width: 0;
+      width: 250px;
       position: fixed;
       top: 0;
       left: 0;
       background-color: #111;
-      overflow-x: hidden;
-      transition: 0.4s;
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
       padding-top: 60px;
-      z-index: 1000;
+      z-index: 1200;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
     }
 
     .sidebar a {
@@ -94,6 +98,32 @@
 
     .sidebar a:hover {
       background-color: #575757;
+    }
+
+    /* Close button inside sidebar */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1100;
+    }
+
+    .overlay.active {
+      display: block;
     }
 
     /* Account dropdown */
@@ -122,7 +152,7 @@
       border-radius: 5px;
       min-width: 120px;
       box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-      z-index: 1200;
+      z-index: 1300;
     }
 
     .account-dropdown a {
@@ -154,9 +184,13 @@
 
   <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
     <a href="index.html">Home</a>
     <a href="menu.html">Our Menu</a>
   </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
   <header style="background-color: #FEF7C3; text-align: center; padding: 50px 20px; font-family: Arial, sans-serif;">
     <h1 style="margin: 0; color: #2B5635; font-size: 45px; letter-spacing: 2px;">ProtenzaX</h1>
@@ -168,50 +202,6 @@
     <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
     Fresh, affordable, and made for fitness lovers.</p>
   </section>
-
-<!--
-  <section id="menu" style="padding: 40px; font-family: Arial, sans-serif; text-align: center;">
-    <h2 style="margin-bottom: 30px; color: #006847;">Our Menu</h2>
-
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
-        <h3 style="color: #d52b1e;">Shakes</h3>
-        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
-          <li>Chocolate <span style="float:right;">₹___</span></li>
-          <li>Belgian Chocolate <span style="float:right;">₹___</span></li>
-          <li>Vanilla <span style="float:right;">₹___</span></li>
-          <li>Cookies and Cream <span style="float:right;">₹___</span></li>
-          <li>Banana Oats Shake <span style="float:right;">₹___</span></li>
-          <li>Strawberry Whey <span style="float:right;">₹___</span></li>
-        </ul>
-      </div>
-
-      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
-        <h3 style="color: #009246;">Snacks</h3>
-        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
-          <li>Protein Bar <span style="float:right;">₹___</span></li>
-          <li>Protein Brownie <span style="float:right;">₹___</span></li>
-          <li>Oats Energy Bar <span style="float:right;">₹___</span></li>
-          <li>Peanut Butter Cookies <span style="float:right;">₹___</span></li>
-          <li>Greek Yogurt Bowl <span style="float:right;">₹___</span></li>
-        </ul>
-      </div>
-
-      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
-        <h3 style="color: #000;">Creatines</h3>
-        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
-          <li>Unflavoured <span style="float:right;">₹___</span></li>
-          <li>Fruit Fusion <span style="float:right;">₹___</span></li>
-          <li>Fruit Punch <span style="float:right;">₹___</span></li>
-          <li>Citrus Blast <span style="float:right;">₹___</span></li>
-          <li>Tropical Tango <span style="float:right;">₹___</span></li>
-          <li>Watermelon Kool Aid <span style="float:right;">₹___</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
--->
-
 
   <section>
     <h2>Why Choose Us?</h2>
@@ -247,12 +237,15 @@
     function toggleMenu() {
       const sidebar = document.getElementById("mySidebar");
       const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
 
-      if (sidebar.style.width === "250px") {
-        sidebar.style.width = "0";
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
         menuBtn.style.display = "block"; // show ☰ again
       } else {
-        sidebar.style.width = "250px";
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
         menuBtn.style.display = "none"; // hide ☰ while sidebar is open
       }
     }
@@ -268,24 +261,13 @@
       document.getElementById("logoutOption").style.display = "none";
     }
 
-    // Close dropdowns and sidebar if clicked outside
+    // Close account dropdown if clicked outside
     window.onclick = function(event) {
-      // Account dropdown
       if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
         const dropdown = document.getElementById("accountDropdown");
         if (dropdown.style.display === "block") {
           dropdown.style.display = "none";
         }
-      }
-
-      // Sidebar
-      const sidebar = document.getElementById("mySidebar");
-      const menuBtn = document.getElementById("menuBtn");
-      if (sidebar.style.width === "250px" && 
-          !event.target.matches('.menu-btn') && 
-          !event.target.closest('#mySidebar')) {
-        sidebar.style.width = "0";
-        menuBtn.style.display = "block"; // show ☰ again
       }
     }
   </script>
