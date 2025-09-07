@@ -11,12 +11,12 @@ body {
 header {
   background-color: #F4F5F0; /*FEF7E1*/
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px 15px;
 }
 header h1 {
   margin: 0;
   color: #008C45;
-  font-size: 45px;
+  font-size: 30px;
   letter-spacing: 2px;
 }
 header p {
