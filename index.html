@@ -35,25 +35,59 @@
       background: none;
       border: none;
       cursor: pointer;
-      z-index: 1100;
     }
 
-    /* Sidebar (slide animation) */
+    /* Account icon + dropdown */
+    .account-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .account-icon {
+      font-size: 28px;
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .account-icon:hover {
+      color: gray;
+    }
+
+    .account-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 120px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      z-index: 1001;
+    }
+
+    .account-dropdown a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .account-dropdown a:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Sidebar */
     .sidebar {
       height: 100%;
-      width: 250px;
+      width: 0;
       position: fixed;
       top: 0;
       left: 0;
       background-color: #111;
-      transform: translateX(-100%);
-      transition: transform 0.4s ease;
+      overflow-x: hidden;
+      transition: 0.4s;
       padding-top: 60px;
-      z-index: 1200;
-    }
-
-    .sidebar.open {
-      transform: translateX(0);
+      z-index: 1002;
     }
 
     .sidebar a {
@@ -69,76 +103,23 @@
       background-color: #575757;
     }
 
-    /* Close button inside sidebar */
+    /* Close button */
     .close-btn {
       position: absolute;
       top: 15px;
       right: 20px;
-      font-size: 28px;
+      font-size: 30px;
       color: white;
       cursor: pointer;
     }
 
-    /* Overlay */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1100;
-    }
-
-    .overlay.active {
-      display: block;
-    }
-
-    /* Account dropdown */
-    .account-container {
-      position: relative;
-      display: inline-block;
-    }
-
-    .account-icon {
-      font-size: 28px;
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .account-icon:hover {
-      color: gray;
-    }
-
-    .account-dropdown {
-      display: none;
-      position: absolute;
-      top: 40px;
-      right: 0;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      min-width: 120px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-      z-index: 1300;
-    }
-
-    .account-dropdown a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-    }
-
-    .account-dropdown a:hover {
-      background: #f4f4f4;
-    }
-
+    /* Header (fixed width & height aligned with body) */
     header {
-      padding: 50px 20px;
+      background-color: #FEF7C3;
+      padding: 30px 20px;
       color: #000;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     header h1 {
@@ -147,9 +128,20 @@
       color: #2B5635;
     }
 
+    header h1 a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    header h1 a:hover {
+      color: #1f3e25;
+    }
+
     header p {
       font-size: 1.2em;
       color: #D1433E;
+      margin: 10px 0 0;
     }
 
     section {
@@ -178,6 +170,9 @@
       color: #fff;
       padding: 15px;
       font-size: 0.9em;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @media (max-width: 600px) {
@@ -195,39 +190,38 @@
   <!-- Navbar -->
   <div class="navbar">
     <!-- Menu button -->
-    <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" onclick="openSidebar()">☰</button>
 
     <!-- Account icon with dropdown -->
     <div class="account-container">
-      <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+      <i class="fas fa-user-circle account-icon" onclick="toggleDropdown()"></i>
       <div id="accountDropdown" class="account-dropdown">
-        <a href="login.html" id="loginOption">Login</a>
-        <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
+        <a href="login.html">Login</a>
       </div>
     </div>
   </div>
 
   <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
-    <span class="close-btn" onclick="toggleMenu()">✖</span>
+    <span class="close-btn" onclick="closeSidebar()">&times;</span>
     <a href="index.html">Home</a>
     <a href="menu.html">Our Menu</a>
   </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
-
+  <!-- Header -->
   <header>
-    <h1>ProtenzaX</h1>
+    <h1><a href="index.html">ProtenzaX</a></h1>
     <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
   </header>
 
+  <!-- About Section -->
   <section>
     <h2>About Us</h2>
     <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
     Fresh, affordable, and made for fitness lovers.</p>
   </section>
 
+  <!-- Why Choose Us -->
   <section>
     <h2>Why Choose Us?</h2>
     <ul>
@@ -238,6 +232,7 @@
     </ul>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact">
     <h2>Contact Us</h2>
     <p>
@@ -254,41 +249,31 @@
     </p>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
 
   <script>
-    // Sidebar toggle
-    function toggleMenu() {
-      const sidebar = document.getElementById("mySidebar");
-      const menuBtn = document.getElementById("menuBtn");
-      const overlay = document.getElementById("overlay");
+    // Sidebar
+    function openSidebar() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.querySelector(".menu-btn").style.display = "none";
+    }
 
-      if (sidebar.classList.contains("open")) {
-        sidebar.classList.remove("open");
-        overlay.classList.remove("active");
-        menuBtn.style.display = "block"; // show ☰ again
-      } else {
-        sidebar.classList.add("open");
-        overlay.classList.add("active");
-        menuBtn.style.display = "none"; // hide ☰ while sidebar is open
-      }
+    function closeSidebar() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.querySelector(".menu-btn").style.display = "inline-block";
     }
 
     // Account dropdown
-    function toggleAccountMenu() {
+    function toggleDropdown() {
       const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      dropdown.style.display =
+        dropdown.style.display === "block" ? "none" : "block";
     }
 
-    function logoutUser() {
-      alert("Logged out!");
-      document.getElementById("loginOption").style.display = "block";
-      document.getElementById("logoutOption").style.display = "none";
-    }
-
-    // Close account dropdown if clicked outside
+    // Close dropdown if clicked outside
     window.onclick = function(event) {
       if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
         const dropdown = document.getElementById("accountDropdown");
