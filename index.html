@@ -141,15 +141,13 @@
 <body>
   
   <!-- Menu button -->
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
   <!-- Account icon with dropdown -->
   <div class="account-container">
     <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
     <div id="accountDropdown" class="account-dropdown">
-      <!-- Default: Login shown -->
       <a href="login.html" id="loginOption">Login</a>
-      <!-- Logout hidden by default -->
       <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
     </div>
   </div>
@@ -214,6 +212,7 @@
   </section>
 -->
 
+
   <section>
     <h2>Why Choose Us?</h2>
     <ul>
@@ -247,7 +246,15 @@
   <script>
     function toggleMenu() {
       const sidebar = document.getElementById("mySidebar");
-      sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+      const menuBtn = document.getElementById("menuBtn");
+
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+        menuBtn.style.display = "block"; // show ☰ again
+      } else {
+        sidebar.style.width = "250px";
+        menuBtn.style.display = "none"; // hide ☰ while sidebar is open
+      }
     }
 
     function toggleAccountMenu() {
@@ -257,8 +264,6 @@
 
     function logoutUser() {
       alert("Logged out!");
-      // Example future Firebase logout code:
-      // firebase.auth().signOut();
       document.getElementById("loginOption").style.display = "block";
       document.getElementById("logoutOption").style.display = "none";
     }
@@ -275,10 +280,12 @@
 
       // Sidebar
       const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.getElementById("menuBtn");
       if (sidebar.style.width === "250px" && 
           !event.target.matches('.menu-btn') && 
           !event.target.closest('#mySidebar')) {
         sidebar.style.width = "0";
+        menuBtn.style.display = "block"; // show ☰ again
       }
     }
   </script>
