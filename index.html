@@ -66,6 +66,7 @@
       font-size: 28px;
       background: none;
       border: none;
+      z-index: 1100;
     }
 
     /* Sidebar */
@@ -79,6 +80,7 @@
       overflow-x: hidden;
       transition: 0.4s;
       padding-top: 60px;
+      z-index: 1000;
     }
 
     .sidebar a {
@@ -94,18 +96,45 @@
       background-color: #575757;
     }
 
-
-    /* Account icon */
-    .account-icon {
+    /* Account dropdown */
+    .account-container {
       position: absolute;
       top: 15px;
       right: 15px;
+    }
+
+    .account-icon {
       font-size: 28px;
       color: black;
-      text-decoration: none;
+      cursor: pointer;
     }
     .account-icon:hover {
       color: gray;
+    }
+
+    .account-dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      min-width: 120px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      z-index: 1200;
+    }
+
+    .account-dropdown a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .account-dropdown a:hover {
+      background: #f4f4f4;
     }
   </style>
 </head>
@@ -114,11 +143,18 @@
   <!-- Menu button -->
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <!-- Account icon -->
-  <a href="login.html" class="account-icon">
-    <i class="fas fa-user-circle"></i>
-  </a>
- <!-- Sidebar -->
+  <!-- Account icon with dropdown -->
+  <div class="account-container">
+    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <div id="accountDropdown" class="account-dropdown">
+      <!-- Default: Login shown -->
+      <a href="login.html" id="loginOption">Login</a>
+      <!-- Logout hidden by default -->
+      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
     <a href="index.html">Home</a>
     <a href="menu.html">Our Menu</a>
@@ -134,6 +170,7 @@
     <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
     Fresh, affordable, and made for fitness lovers.</p>
   </section>
+
 <!--
   <section id="menu" style="padding: 40px; font-family: Arial, sans-serif; text-align: center;">
     <h2 style="margin-bottom: 30px; color: #006847;">Our Menu</h2>
@@ -176,6 +213,7 @@
     </div>
   </section>
 -->
+
   <section>
     <h2>Why Choose Us?</h2>
     <ul>
@@ -209,10 +247,38 @@
   <script>
     function toggleMenu() {
       const sidebar = document.getElementById("mySidebar");
-      if (sidebar.style.width === "250px") {
+      sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+
+    function toggleAccountMenu() {
+      const dropdown = document.getElementById("accountDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logoutUser() {
+      alert("Logged out!");
+      // Example future Firebase logout code:
+      // firebase.auth().signOut();
+      document.getElementById("loginOption").style.display = "block";
+      document.getElementById("logoutOption").style.display = "none";
+    }
+
+    // Close dropdowns and sidebar if clicked outside
+    window.onclick = function(event) {
+      // Account dropdown
+      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+        const dropdown = document.getElementById("accountDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+
+      // Sidebar
+      const sidebar = document.getElementById("mySidebar");
+      if (sidebar.style.width === "250px" && 
+          !event.target.matches('.menu-btn') && 
+          !event.target.closest('#mySidebar')) {
         sidebar.style.width = "0";
-      } else {
-        sidebar.style.width = "250px";
       }
     }
   </script>
