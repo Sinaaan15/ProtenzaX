@@ -3,74 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProtenzaX</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>ProtenzaX</title>
 </head>
 <body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <!-- Left: Menu -->
-    <button class="menu-btn" onclick="openSidebar()">☰</button>
+  
+  <!-- Menu button -->
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <!-- Center: Brand -->
-    <div class="navbar-center">
-      <a href="index.html">ProtenzaX</a>
+  <!-- Account icon with dropdown -->
+  <div class="account-container">
+    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <div id="accountDropdown" class="account-dropdown">
+      <a href="login.html" id="loginOption">Login</a>
+      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
     </div>
-
-    <!-- Right: Account -->
-    <div class="account-container">
-      <i class="fas fa-user-circle account-icon" onclick="toggleDropdown()"></i>
-      <div id="accountDropdown" class="account-dropdown">
-        <a href="login.html">Login</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tagline strip -->
-  <div class="tagline-strip">
-    Built by Dedication. Fueled by Protein.
   </div>
 
   <!-- Sidebar -->
-  <div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="closeSidebar()">×</button>
+  <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="menu.html">Our Menu</a>
   </div>
 
-  <!-- Main Content -->
-  <div class="content">
-    <section id="about">
-      <h2>About Us</h2>
-      <p>
-        ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym.
-        Fresh, affordable, and made for fitness lovers.
-      </p>
-    </section>
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
-    <section id="why-choose">
-      <h2>Why Choose Us?</h2>
-      <ul>
-        <li>✅ High Quality Ingredients</li>
-        <li>✅ Perfect for gym-goers</li>
-        <li>✅ Affordable prices</li>
-        <li>✅ Right across your gym</li>
-      </ul>
-    </section>
+  <header>
+    <h1>ProtenzaX</h1>
+    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+  </header>
 
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <p><i class="fab fa-instagram"></i> @protenzax</p>
-      <p><i class="fas fa-envelope"></i> info@protenzax.in</p>
-    </section>
-  </div>
+  <section>
+    <h2>About Us</h2>
+    <p>ProtenzaX is your go-to stop for protein shakes and snacks, right opposite the gym. 
+    Fresh, affordable, and made for fitness lovers.</p>
+  </section>
 
-  <!-- Footer -->
+  <section>
+    <h2>Why Choose Us?</h2>
+    <ul>
+      <li>✅ High Quality Ingredients</li>
+      <li>✅ Perfect for gym-goers</li>
+      <li>✅ Affordable prices</li>
+      <li>✅ Right across your gym</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>
+      <a href="https://www.instagram.com/protenzax" target="_blank">
+         <i class="fab fa-instagram"></i> @protenzax
+      </a>
+    </p>
+    <p>
+      <a href="mailto:info@protenzax.in">
+         <i class="fas fa-envelope"></i> info@protenzax.in
+      </a>
+    </p>
+  </section>
+
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
+  
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
+
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        menuBtn.style.display = "block"; // show ☰ again
+      } else {
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        menuBtn.style.display = "none"; // hide ☰ while sidebar is open
+      }
+    }
+
+    function toggleAccountMenu() {
+      const dropdown = document.getElementById("accountDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logoutUser() {
+      alert("Logged out!");
+      document.getElementById("loginOption").style.display = "block";
+      document.getElementById("logoutOption").style.display = "none";
+    }
+
+    // Close account dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+        const dropdown = document.getElementById("accountDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
