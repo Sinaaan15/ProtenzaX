@@ -10,23 +10,32 @@
 <body>
   
   <!-- Menu button -->
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <!-- Account icon -->
-  <a href="login.html" class="account-icon">
-    <i class="fas fa-user-circle"></i>
-  </a>
- <!-- Sidebar -->
-  <div id="mySidebar" class="sidebar">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Our Menu</a>
-    <a href="logout.html" class="logout">Log Out</a>
+  <!-- Account icon with dropdown -->
+  <div class="account-container">
+    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <div id="accountDropdown" class="account-dropdown">
+      <a href="login.html" id="loginOption">Login</a>
+      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
+    </div>
   </div>
 
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Our Menu</a>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
   <header>
-    <h1 style="margin: 0; color: #008C45; font-size: 30px; letter-spacing: 2px;">ProtenzaX</h1>
-    <p style="margin: 10px 0 0; color: #D1433E; font-size: 18px;"><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+    <h1>ProtenzaX</h1>
+    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
   </header>
+  
   <section id="menu" style="padding: 40px; font-family: Arial, sans-serif; text-align: center;">
     <h2 style="margin-bottom: 30px; color: #006847;">Our Menu</h2>
 
