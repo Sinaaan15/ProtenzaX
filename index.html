@@ -13,16 +13,20 @@
       text-align: center;
       background-color: #FEF7E1;
       color: #333;
-      overflow-x: hidden; /* prevent horizontal overflow */
+      overflow-x: hidden; /* prevent horizontal scroll */
     }
 
+    /* Sticky navbar */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
       background-color: #FEF7E1; /* match body */
       padding: 15px 20px;
-      position: relative;
+      border-bottom: 1px solid #ddd;
     }
 
     /* Brand name */
