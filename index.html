@@ -13,129 +13,30 @@
       text-align: center;
       background-color: #FEF7E1;
       color: #333;
+      overflow-x: hidden; /* prevent horizontal overflow */
     }
 
-    /* Sticky Navbar */
-    .navbar {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      background-color: #FEF7C3;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      z-index: 1000;
-      border-bottom: 1px solid #ddd;
-    }
-
-    /* Menu button */
-    .menu-btn {
-      font-size: 26px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Brand (ProtenzaX clickable) */
-    .brand {
-      font-size: 22px;
-      color: #2B5635;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .brand:hover {
-      color: #1f3e25;
-    }
-
-    /* Account icon + dropdown */
-    .account-container {
-      position: relative;
-      display: inline-block;
-    }
-
-    .account-icon {
-      font-size: 26px;
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .account-icon:hover {
-      color: gray;
-    }
-
-    .account-dropdown {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: white;
-      min-width: 120px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      z-index: 1001;
-    }
-
-    .account-dropdown a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: black;
-    }
-
-    .account-dropdown a:hover {
-      background-color: #f0f0f0;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.4s;
-      padding-top: 60px;
-      z-index: 1002;
-    }
-
-    .sidebar a {
-      padding: 12px 24px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #575757;
-    }
-
-    /* Close button */
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 30px;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* Header below navbar */
     header {
-      padding: 25px 20px;
-      background-color: #FEF7E1;
-      text-align: center;
-      color: #D1433E;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #FEF7E1; /* match body */
+      padding: 15px 20px;
+      position: relative;
     }
 
-    header p {
+    /* Brand name */
+    header h1 {
       margin: 0;
-      font-size: 1.1em;
+      font-size: 24px;
+      color: #2B5635;
+      flex: 1;
+      text-align: center;
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: #2B5635;
     }
 
     section {
@@ -164,51 +65,97 @@
       color: #fff;
       padding: 15px;
       font-size: 0.9em;
+      margin-top: 20px;
     }
 
     @media (max-width: 600px) {
-      .brand {
-        font-size: 18px;
-      }
-      header p {
-        font-size: 1em;
+      header h1 {
+        font-size: 20px;
       }
       section {
         padding: 20px 10px;
       }
     }
+
+    /* Hamburger */
+    .menu-btn {
+      cursor: pointer;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: black;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: width 0.4s ease;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 12px 24px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+
+    /* Close button inside sidebar */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* Account icon */
+    .account-icon {
+      font-size: 28px;
+      color: black;
+      text-decoration: none;
+    }
+    .account-icon:hover {
+      color: gray;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <div class="navbar">
+  
+  <header>
     <!-- Menu button -->
-    <button class="menu-btn" onclick="openSidebar()">☰</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <!-- Brand clickable -->
-    <a href="index.html" class="brand">ProtenzaX</a>
+    <!-- Brand name -->
+    <h1><a href="index.html">ProtenzaX</a></h1>
 
-    <!-- Account icon with dropdown -->
-    <div class="account-container">
-      <i class="fas fa-user-circle account-icon" onclick="toggleDropdown()"></i>
-      <div id="accountDropdown" class="account-dropdown">
-        <a href="login.html">Login</a>
-      </div>
-    </div>
-  </div>
+    <!-- Account icon -->
+    <a href="login.html" class="account-icon">
+      <i class="fas fa-user-circle"></i>
+    </a>
+  </header>
 
   <!-- Sidebar -->
   <div id="mySidebar" class="sidebar">
-    <span class="close-btn" onclick="closeSidebar()">&times;</span>
+    <button class="close-btn" onclick="toggleMenu()">×</button>
     <a href="index.html">Home</a>
     <a href="menu.html">Our Menu</a>
   </div>
-
-  <!-- Header slogan -->
-  <header>
-    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
-  </header>
 
   <section>
     <h2>About Us</h2>
@@ -226,15 +173,15 @@
     </ul>
   </section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>
+  <section id="contact" style="text-align:center; font-family: Arial, sans-serif;">
+    <h2 style="margin-bottom: 20px;">Contact Us</h2>
+    <p style="margin: 10px 0;">
       <a href="https://www.instagram.com/protenzax" target="_blank" 
          style="text-decoration: none; color: #E4405F; font-size: 18px;">
          <i class="fab fa-instagram"></i> @protenzax
       </a>
     </p>
-    <p>
+    <p style="margin: 10px 0;">
       <a href="mailto:info@protenzax.in" 
          style="text-decoration: none; color: #25D366; font-size: 18px;">
          <i class="fas fa-envelope"></i> info@protenzax.in
@@ -245,34 +192,34 @@
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
   </footer>
-
+  
   <script>
-    // Sidebar
-    function openSidebar() {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.querySelector(".menu-btn").style.display = "none";
-    }
+    function toggleMenu() {
+      const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.querySelector(".menu-btn");
 
-    function closeSidebar() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.querySelector(".menu-btn").style.display = "inline-block";
-    }
-
-    // Account dropdown
-    function toggleDropdown() {
-      const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    }
-
-    // Close dropdown if clicked outside
-    window.onclick = function(event) {
-      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
-        var dropdown = document.getElementById("accountDropdown");
-        if (dropdown.style.display === "block") {
-          dropdown.style.display = "none";
-        }
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+        menuBtn.style.display = "inline-block";
+      } else {
+        sidebar.style.width = "250px";
+        menuBtn.style.display = "none";
       }
     }
+
+    // Close sidebar when clicking outside
+    document.addEventListener("click", function(event) {
+      const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.querySelector(".menu-btn");
+      if (
+        sidebar.style.width === "250px" &&
+        !sidebar.contains(event.target) &&
+        !menuBtn.contains(event.target)
+      ) {
+        sidebar.style.width = "0";
+        menuBtn.style.display = "inline-block";
+      }
+    });
   </script>
 </body>
 </html>
