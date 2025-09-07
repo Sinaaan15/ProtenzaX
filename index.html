@@ -27,11 +27,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 20px;
+      padding: 6px 20px;
       z-index: 1000;
       border-bottom: 1px solid #ddd;
       flex-wrap: wrap;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Shadow added */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
 
     /* Navbar left (menu) */
@@ -44,12 +44,13 @@
 
     /* Navbar center (brand + tagline) */
     .navbar-center {
-      text-align: center;
       flex: 1;
+      text-align: center;
+      line-height: 1.2;
     }
 
     .navbar-center a {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       color: #2B5635;
       text-decoration: none;
@@ -57,10 +58,10 @@
     }
 
     .tagline {
-      font-size: 12px;
+      font-size: 11px;
       font-style: italic;
       color: #D1433E;
-      margin-top: 2px;
+      margin-top: 0;
     }
 
     /* Navbar right (account) */
@@ -174,10 +175,10 @@
 
     @media (max-width: 600px) {
       .navbar-center a {
-        font-size: 20px;
+        font-size: 18px;
       }
       .tagline {
-        font-size: 11px;
+        font-size: 10px;
       }
       section {
         padding: 20px 10px;
