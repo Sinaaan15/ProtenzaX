@@ -3,146 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Account | ProtenzaX</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #FEF7E1;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 400px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-bottom: 20px;
-      color: #2B5635;
-    }
-    input, button {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #2B5635;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #1e3d25;
-    }
-    .profile {
-      text-align: left;
-    }
-    .logout-btn {
-      background: #D1433E;
-      margin-top: 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>My Account - ProtenzaX</title>
 </head>
 <body>
+  
+  <!-- Menu button -->
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <div class="container">
-    <h2>My Account</h2>
-
-    <!-- Profile form (for new users) -->
-    <div id="profileForm" style="display:none;">
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="number" id="age" placeholder="Age" required>
-      <button onclick="saveProfile()">Save Profile</button>
-    </div>
-
-    <!-- Profile details (for existing users) -->
-    <div id="profileDetails" class="profile" style="display:none;">
-      <p><b>Name:</b> <span id="displayName"></span></p>
-      <p><b>Email:</b> <span id="displayEmail"></span></p>
-      <p><b>Age:</b> <span id="displayAge"></span></p>
-      <button class="logout-btn" onclick="logoutUser()">Logout</button>
+  <!-- Account icon with dropdown -->
+  <div class="account-container">
+    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <div id="accountDropdown" class="account-dropdown">
+      <a href="login.html" id="loginOption">Login</a>
+      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
     </div>
   </div>
 
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Our Menu</a>
+    <a href="account.html">My Account</a>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>ProtenzaX</h1>
+    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+  </header>
+
+  <!-- Account Section -->
+  <section>
+    <h2>My Account</h2>
+    <p>Welcome to your account page! 🎉</p>
+    <p>Here you’ll be able to see and edit your details once you’ve logged in.</p>
+
+    <!-- Placeholder for user info -->
+    <div id="userInfo" style="margin-top:20px;">
+      <p><b>Name:</b> <span id="userName">Guest</span></p>
+      <p><b>Email:</b> <span id="userEmail">Not Logged In</span></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ProtenzaX | All Rights Reserved</p>
+  </footer>
+
   <script>
-    // ✅ Firebase config (replace with yours)
-    const firebaseConfig = {
-      apiKey: "AIzaSyA0R4wQUte4MzAggd_o_pvGzpkOqNcRcrg",
-      authDomain: "protenzax.firebaseapp.com",
-      projectId: "protenzax",
-      storageBucket: "protenzax.firebasestorage.app",
-      messagingSenderId: "708344401873",
-      appId: "1:708344401873:web:49835af7ca127a14759af0"
-    };
+    function toggleMenu() {
+      const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
 
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // ✅ Check user state
-    auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        window.location.href = "login.html"; // redirect if not logged in
-        return;
-      }
-
-      const userRef = db.collection("users").doc(user.uid);
-      const doc = await userRef.get();
-
-      if (doc.exists) {
-        // Existing user → show profile details
-        const data = doc.data();
-        document.getElementById("profileDetails").style.display = "block";
-        document.getElementById("displayName").innerText = data.name;
-        document.getElementById("displayEmail").innerText = data.email;
-        document.getElementById("displayAge").innerText = data.age;
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        menuBtn.style.display = "block"; 
       } else {
-        // New user → show profile form
-        document.getElementById("profileForm").style.display = "block";
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        menuBtn.style.display = "none"; 
       }
-    });
-
-    // ✅ Save profile
-    async function saveProfile() {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const age = document.getElementById("age").value;
-
-      if (!name || !email || !age) {
-        alert("Please fill all fields");
-        return;
-      }
-
-      await db.collection("users").doc(user.uid).set({
-        name: name,
-        email: email,
-        age: age,
-        phone: user.phoneNumber,
-        createdAt: new Date()
-      });
-
-      alert("✅ Profile saved!");
-      location.reload(); // reload to show profile details
     }
 
-    // ✅ Logout
+    function toggleAccountMenu() {
+      const dropdown = document.getElementById("accountDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
     function logoutUser() {
-      auth.signOut().then(() => {
-        window.location.href = "index.html";
-      });
+      alert("Logged out!");
+      document.getElementById("loginOption").style.display = "block";
+      document.getElementById("logoutOption").style.display = "none";
+      document.getElementById("userName").innerText = "Guest";
+      document.getElementById("userEmail").innerText = "Not Logged In";
+    }
+
+    // Close account dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+        const dropdown = document.getElementById("accountDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
     }
   </script>
 </body>
