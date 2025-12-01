@@ -1,171 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account - ProtenzaX</title>
-
-  <style>
-    /* --- ACCOUNT PAGE STYLES --- */
-
-    .account-wrapper {
-      max-width: 500px;
-      margin: 120px auto 40px auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
-      text-align: center;
-    }
-
-    .account-wrapper h2 {
-      margin-bottom: 5px;
-      font-size: 26px;
-      font-weight: 700;
-    }
-
-    .account-wrapper p.subtitle {
-      margin-top: 0;
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-
-    .profile-icon-big {
-      font-size: 80px;
-      color: black;
-      margin-bottom: 20px;
-    }
-
-    .info-box {
-      text-align: left;
-      margin-top: 20px;
-    }
-
-    .info-box p {
-      font-size: 16px;
-      margin: 10px 0;
-      padding: 12px;
-      background: #f7f7f7;
-      border-radius: 8px;
-    }
-
-    .edit-btn {
-      margin-top: 25px;
-      padding: 12px 25px;
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .edit-btn:hover {
-      opacity: 0.7;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <!-- Menu button -->
-  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
-  <!-- Account icon with dropdown -->
-  <div class="account-container">
-    <i
-      class="fas fa-user-circle account-icon"
-      onclick="toggleAccountMenu()"
-    ></i>
-    <div id="accountDropdown" class="account-dropdown">
-      <a href="login.html" id="loginOption">Login</a>
-      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
-    </div>
+<!-- MENU BUTTON -->
+<button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<!-- ACCOUNT ICON -->
+<div class="account-container">
+  <i class="fas fa-user-circle account-icon"></i>
+</div>
+
+<!-- SIDEBAR -->
+<div id="mySidebar" class="sidebar">
+  <span class="close-btn" onclick="toggleMenu()">✖</span>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Our Menu</a>
+  <a href="account.html">My Account</a>
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<header>
+  <h1>ProtenzaX</h1>
+  <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+</header>
+
+<section>
+  <h2>My Account</h2>
+
+  <div class="account-box">
+
+    <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+    <p><strong>Phone:</strong> <span id="userPhone">Loading...</span></p>
+    <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+    <p><strong>Gender:</strong> <span id="userGender">Loading...</span></p>
+    <p><strong>Age:</strong> <span id="userAge">Loading...</span></p>
+
+    <button class="edit-btn" onclick="window.location.href='profile-setup.html'">
+      Edit Profile
+    </button>
+
+    <button class="logout-btn" onclick="logoutUser()">
+      Logout
+    </button>
+
   </div>
 
-  <!-- Sidebar -->
-  <div id="mySidebar" class="sidebar">
-    <span class="close-btn" onclick="toggleMenu()">✖</span>
-    <a href="index.html">Home</a>
-    <a href="menu.html">Our Menu</a>
-    <a href="account.html">My Account</a>
-  </div>
+</section>
 
-  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<footer>
+  <p>© 2025 ProtenzaX | All Rights Reserved</p>
+</footer>
 
-  <!-- Header -->
-  <header>
-    <h1>ProtenzaX</h1>
-    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
-  </header>
+<!-- FIREBASE FETCH LOGIC -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  <!-- NEW CLEAN ACCOUNT SECTION -->
-  <div class="account-wrapper">
-    <i class="fas fa-user-circle profile-icon-big"></i>
+  const firebaseConfig = {
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  };
 
-    <h2>My Account</h2>
-    <p class="subtitle">Manage your personal information</p>
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const db = getFirestore();
 
-    <div class="info-box">
-      <p><b>Name:</b> <span id="userName">Guest</span></p>
-      <p><b>Email:</b> <span id="userEmail">Not Logged In</span></p>
-    </div>
-
-    <button class="edit-btn">Edit Details</button>
-  </div>
-
-  <footer>
-    <p>© 2025 ProtenzaX | All Rights Reserved</p>
-  </footer>
-
-  <script>
-    function toggleMenu() {
-      const sidebar = document.getElementById("mySidebar");
-      const menuBtn = document.getElementById("menuBtn");
-      const overlay = document.getElementById("overlay");
-
-      if (sidebar.classList.contains("open")) {
-        sidebar.classList.remove("open");
-        overlay.classList.remove("active");
-        menuBtn.style.display = "block";
-      } else {
-        sidebar.classList.add("open");
-        overlay.classList.add("active");
-        menuBtn.style.display = "none";
-      }
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
     }
 
-    function toggleAccountMenu() {
-      const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display =
-        dropdown.style.display === "block" ? "none" : "block";
-    }
+    document.getElementById("userPhone").innerText = user.phoneNumber;
 
-    function logoutUser() {
-      alert("Logged out!");
-      document.getElementById("loginOption").style.display = "block";
-      document.getElementById("logoutOption").style.display = "none";
-      document.getElementById("userName").innerText = "Guest";
-      document.getElementById("userEmail").innerText = "Not Logged In";
-    }
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
 
-    window.onclick = function (event) {
-      if (
-        !event.target.matches(".account-icon") &&
-        !event.target.closest(".account-container")
-      ) {
-        const dropdown = document.getElementById("accountDropdown");
-        if (dropdown.style.display === "block") {
-          dropdown.style.display = "none";
-        }
-      }
-    };
-  </script>
+    if (snap.exists()) {
+      const data = snap.data();
+      document.getElementById("userName").innerText = data.name || "Not set";
+      document.getElementById("userEmail").innerText = data.email || "Not set";
+      document.getElementById("userGender").innerText = data.gender || "Not set";
+      document.getElementById("userAge").innerText = data.age || "Not set";
+    } else {
+      window.location.href = "profile-setup.html";
+    }
+  });
+
+  window.logoutUser = function () {
+    signOut(auth).then(() => {
+      window.location.href = "index.html";
+    });
+  }
+</script>
+
+<!-- TOGGLE MENU SCRIPT -->
+<script src="script.js"></script>
+
 </body>
 </html>
