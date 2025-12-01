@@ -1,20 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
   <title>My Account - ProtenzaX</title>
+
+  <style>
+    /* --- ACCOUNT PAGE STYLES --- */
+
+    .account-wrapper {
+      max-width: 500px;
+      margin: 120px auto 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+      text-align: center;
+    }
+
+    .account-wrapper h2 {
+      margin-bottom: 5px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .account-wrapper p.subtitle {
+      margin-top: 0;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .profile-icon-big {
+      font-size: 80px;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    .info-box {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .info-box p {
+      font-size: 16px;
+      margin: 10px 0;
+      padding: 12px;
+      background: #f7f7f7;
+      border-radius: 8px;
+    }
+
+    .edit-btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .edit-btn:hover {
+      opacity: 0.7;
+    }
+  </style>
 </head>
+
 <body>
-  
   <!-- Menu button -->
   <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
 
   <!-- Account icon with dropdown -->
   <div class="account-container">
-    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <i
+      class="fas fa-user-circle account-icon"
+      onclick="toggleAccountMenu()"
+    ></i>
     <div id="accountDropdown" class="account-dropdown">
       <a href="login.html" id="loginOption">Login</a>
       <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
@@ -29,7 +97,6 @@
     <a href="account.html">My Account</a>
   </div>
 
-  <!-- Overlay -->
   <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
   <!-- Header -->
@@ -38,34 +105,20 @@
     <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
   </header>
 
-  <!-- Account Section -->
-  <section>
-    <h2>My Account</h2>
-    <p>Welcome to your account page! 🎉</p>
-    <p>Here you’ll be able to see and edit your details once you’ve logged in.</p>
+  <!-- NEW CLEAN ACCOUNT SECTION -->
+  <div class="account-wrapper">
+    <i class="fas fa-user-circle profile-icon-big"></i>
 
-    <!-- Placeholder for user info -->
-    <div id="userInfo" style="margin-top:20px;">
+    <h2>My Account</h2>
+    <p class="subtitle">Manage your personal information</p>
+
+    <div class="info-box">
       <p><b>Name:</b> <span id="userName">Guest</span></p>
       <p><b>Email:</b> <span id="userEmail">Not Logged In</span></p>
     </div>
-  </section>
 
-  <section id="contact" style="text-align:center; font-family: Arial, sans-serif;">
-    <h2 style="margin-bottom: 20px; color: #000;">Contact Us</h2>
-    <p style="margin: 10px 0;">
-      <a href="https://www.instagram.com/protenzax" target="_blank" 
-         style="text-decoration: none; color: #E4405F; font-size: 18px;">
-         <i class="fab fa-instagram"></i> @protenzax
-      </a>
-    </p>
-    <p style="margin: 10px 0;">
-      <a href="mailto:info@protenzax.in" 
-         style="text-decoration: none; color: #25D366; font-size: 18px;">
-         <i class="fas fa-envelope"></i> info@protenzax.in
-      </a>
-    </p>
-  </section>
+    <button class="edit-btn">Edit Details</button>
+  </div>
 
   <footer>
     <p>© 2025 ProtenzaX | All Rights Reserved</p>
@@ -80,17 +133,18 @@
       if (sidebar.classList.contains("open")) {
         sidebar.classList.remove("open");
         overlay.classList.remove("active");
-        menuBtn.style.display = "block"; 
+        menuBtn.style.display = "block";
       } else {
         sidebar.classList.add("open");
         overlay.classList.add("active");
-        menuBtn.style.display = "none"; 
+        menuBtn.style.display = "none";
       }
     }
 
     function toggleAccountMenu() {
       const dropdown = document.getElementById("accountDropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      dropdown.style.display =
+        dropdown.style.display === "block" ? "none" : "block";
     }
 
     function logoutUser() {
@@ -101,15 +155,17 @@
       document.getElementById("userEmail").innerText = "Not Logged In";
     }
 
-    // Close account dropdown if clicked outside
-    window.onclick = function(event) {
-      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+    window.onclick = function (event) {
+      if (
+        !event.target.matches(".account-icon") &&
+        !event.target.closest(".account-container")
+      ) {
         const dropdown = document.getElementById("accountDropdown");
         if (dropdown.style.display === "block") {
           dropdown.style.display = "none";
         }
       }
-    }
+    };
   </script>
 </body>
 </html>
