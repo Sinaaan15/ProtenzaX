@@ -218,6 +218,15 @@
           alert("❌ Invalid OTP. Try again.");
         });
     }
+    const user = result.user;
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+        window.location.href = "account.html";   // user already exists
+    } else {
+        window.location.href = "profile-setup.html";  // first time login
+    }
   </script>
 
 </body>
