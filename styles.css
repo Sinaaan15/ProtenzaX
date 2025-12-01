@@ -189,3 +189,45 @@ footer {
 .submit-btn:hover {
   background-color: #006F36;
 }
+.account-box {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: left;
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.account-box p {
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+.edit-btn, .logout-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #008C45;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #006F36;
+}
+
+.logout-btn {
+  background-color: #CD212A;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #a81820;
+}
