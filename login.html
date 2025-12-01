@@ -210,14 +210,6 @@
       window.confirmationResult.confirm(otp)
         .then(result => {
           alert("✅ Login successful! Welcome " + result.user.phoneNumber);
-          const user = result.user;
-      // ✅ Redirect to account page
-        window.location.href = "account.html";
-        })
-        .catch(error => {
-          alert("❌ Invalid OTP. Try again.");
-        });
-    }
     const user = result.user;
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
