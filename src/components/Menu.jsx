@@ -135,9 +135,11 @@ const Menu = () => {
                     </AnimatePresence>
                 </div>
 
-                <div className="mt-12 text-center md:hidden">
-                    <Button variant="outline" onClick={() => setActiveCategory('all')}>View Full Menu</Button>
-                </div>
+                {activeCategory !== 'all' && (
+                    <div className="mt-12 text-center md:hidden">
+                        <Button variant="outline" onClick={() => setActiveCategory('all')}>View Full Menu</Button>
+                    </div>
+                )}
             </div>
         </section>
     );
