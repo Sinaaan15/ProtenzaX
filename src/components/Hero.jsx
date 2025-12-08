@@ -25,13 +25,10 @@ const Hero = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 tracking-tighter">
-                            Protenza<span className="text-primary">X</span>
-                        </h1>
-                        <h2 className="text-2xl md:text-4xl font-bold text-white mb-8 leading-tight">
+                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                             Built by <span className="text-primary text-shadow-neon">Dedication</span>.<br />
                             Fueled by <span className="text-primary text-shadow-neon">Protein</span>.
-                        </h2>
+                        </h1>
                         <p className="text-zinc-300 text-lg md:text-xl mb-8 max-w-lg">
                             The ultimate fuel station for your workout. Freshly blended protein shakes and snacks, right where you need them.
                         </p>

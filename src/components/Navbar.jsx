@@ -39,7 +39,7 @@ const Navbar = ({ isLoggedIn }) => {
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
-                <Link to="/" className="text-2xl font-bold tracking-tighter">
+                <Link to="/" className="text-4xl md:text-5xl font-bold tracking-tighter">
                     Protenza<span className="text-primary">X</span>
                 </Link>
 
