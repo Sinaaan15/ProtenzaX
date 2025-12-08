@@ -21,6 +21,7 @@ const Layout = ({ children, isLoggedIn }) => {
 
 import { CartProvider } from './context/CartContext';
 import CartDrawer from './components/CartDrawer';
+import Toast from './components/Toast';
 
 // ... Layout definition ...
 
@@ -32,6 +33,7 @@ function App() {
       <Router>
         <div className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-black">
           <CartDrawer />
+          <Toast />
           <Layout isLoggedIn={isLoggedIn}>
             <Routes>
               <Route path="/" element={<Home />} />

@@ -22,6 +22,7 @@ export const CartProvider = ({ children }) => {
     });
 
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [notification, setNotification] = useState(null); // { message: string, visible: boolean }
 
     useEffect(() => {
         try {
@@ -31,9 +32,20 @@ export const CartProvider = ({ children }) => {
         }
     }, [cartItems]);
 
+    // Auto-hide notification after 3 seconds
+    useEffect(() => {
+        if (notification) {
+            const timer = setTimeout(() => {
+                setNotification(null);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [notification]);
+
     const addToCart = (product) => {
         setCartItems(prev => {
-            const existingItem = prev.find(item => item.name === product.name); // Using name as ID for now since IDs aren't unique across categories in mock data
+            const existingItem = prev.find(item => item.name === product.name);
+            // Using name as ID for now since IDs aren't unique across categories in mock data
             if (existingItem) {
                 return prev.map(item =>
                     item.name === product.name
@@ -43,7 +55,8 @@ export const CartProvider = ({ children }) => {
             }
             return [...prev, { ...product, quantity: 1 }];
         });
-        setIsCartOpen(true); // Open cart when item is added
+        // setIsCartOpen(true); // Removed auto-open behavior
+        setNotification({ message: `Added ${product.name} to cart` });
     };
 
     const removeFromCart = (productName) => {
@@ -67,6 +80,8 @@ export const CartProvider = ({ children }) => {
     };
 
     const toggleCart = () => setIsCartOpen(prev => !prev);
+    const openCart = () => setIsCartOpen(true);
+    const closeNotification = () => setNotification(null);
 
     // Derived state
     const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -86,8 +101,11 @@ export const CartProvider = ({ children }) => {
             clearCart,
             isCartOpen,
             toggleCart,
+            openCart,
             cartCount,
-            cartTotal
+            cartTotal,
+            notification,
+            closeNotification
         }}>
             {children}
         </CartContext.Provider>
