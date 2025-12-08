@@ -25,12 +25,9 @@ const Hero = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-primary font-bold text-lg mb-4 tracking-widest uppercase">
-                            ProtenzaX
-                        </h2>
                         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                             Built by <span className="text-primary text-shadow-neon">Dedication</span>.<br />
-                            Fueled by Protein.
+                            Fueled by <span className="text-primary text-shadow-neon">Protein</span>.
                         </h1>
                         <p className="text-zinc-300 text-lg md:text-xl mb-8 max-w-lg">
                             The ultimate fuel station for your workout. Freshly blended protein shakes and snacks, right where you need them.
