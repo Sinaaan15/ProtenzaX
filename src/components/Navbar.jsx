@@ -39,9 +39,9 @@ const Navbar = ({ isLoggedIn }) => {
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
-                <Link to="/" className="text-4xl md:text-5xl font-bold tracking-tighter">
+                <a href="/" className="text-4xl md:text-5xl font-bold tracking-tighter">
                     Protenza<span className="text-primary">X</span>
-                </Link>
+                </a>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8">
