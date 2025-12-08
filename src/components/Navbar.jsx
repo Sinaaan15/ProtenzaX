@@ -40,7 +40,7 @@ const Navbar = ({ isLoggedIn }) => {
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 <Link to="/" className="text-2xl font-bold tracking-tighter">
-                    PROTENZA<span className="text-primary">X</span>
+                    Protenza<span className="text-primary">X</span>
                 </Link>
 
                 {/* Desktop Menu */}

@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     <div className="col-span-1 md:col-span-2">
                         <a href="#" className="text-2xl font-bold tracking-tighter block mb-6">
-                            PROTENZA<span className="text-primary">X</span>
+                            Protenza<span className="text-primary">X</span>
                         </a>
                         <p className="text-zinc-400 max-w-sm mb-6">
                             Built by Dedication. Fueled by Protein. We are committed to providing the best nutrition for your fitness journey.

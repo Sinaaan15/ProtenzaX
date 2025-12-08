@@ -81,7 +81,13 @@ const MenuCard = ({ item, index }) => {
 };
 
 const Menu = () => {
-    const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
+    const [activeCategory, setActiveCategory] = useState('all');
+
+    const allItems = menuCategories.flatMap(cat => cat.items);
+
+    const displayItems = activeCategory === 'all'
+        ? allItems
+        : menuCategories.find(c => c.id === activeCategory)?.items || [];
 
     return (
         <section id="menu" className="py-20 bg-zinc-950">
@@ -96,13 +102,22 @@ const Menu = () => {
 
                     {/* Category Tabs */}
                     <div className="flex flex-wrap justify-center gap-4 mb-8">
+                        <button
+                            onClick={() => setActiveCategory('all')}
+                            className={`flex items-center gap-2 px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeCategory === 'all'
+                                ? 'bg-primary text-black scale-105'
+                                : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+                                }`}
+                        >
+                            All
+                        </button>
                         {menuCategories.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`flex items-center gap-2 px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeCategory === cat.id
-                                        ? 'bg-primary text-black scale-105'
-                                        : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+                                    ? 'bg-primary text-black scale-105'
+                                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
                                     }`}
                             >
                                 {cat.icon}
@@ -114,14 +129,14 @@ const Menu = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
                     <AnimatePresence mode="popLayout">
-                        {menuCategories.find(c => c.id === activeCategory).items.map((item, index) => (
+                        {displayItems.map((item, index) => (
                             <MenuCard key={`${activeCategory}-${item.name}`} item={item} index={index} />
                         ))}
                     </AnimatePresence>
                 </div>
 
                 <div className="mt-12 text-center md:hidden">
-                    <Button variant="outline">View Full Menu</Button>
+                    <Button variant="outline" onClick={() => setActiveCategory('all')}>View Full Menu</Button>
                 </div>
             </div>
         </section>
