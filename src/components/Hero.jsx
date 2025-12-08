@@ -25,7 +25,7 @@ const Hero = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                             Built by <span className="text-primary text-shadow-neon">Dedication</span>.<br />
                             Fueled by <span className="text-primary text-shadow-neon">Protein</span>.
                         </h1>
