@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>ProtenzaX</title>
+</head>
+<body>
+  
+  <!-- Menu button -->
+  <button id="menuBtn" class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <!-- Account icon with dropdown -->
+  <div class="account-container">
+    <i class="fas fa-user-circle account-icon" onclick="toggleAccountMenu()"></i>
+    <div id="accountDropdown" class="account-dropdown">
+      <a href="login.html" id="loginOption">Login</a>
+      <a href="#" id="logoutOption" style="display:none;" onclick="logoutUser()">Logout</a>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">✖</span>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Our Menu</a>
+    <a href="account.html">My Account</a>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+  <header>
+    <h1>ProtenzaX</h1>
+    <p><b><i>Built by Dedication. Fueled by Protein.</i></b></p>
+  </header>
+  
+  <section id="menu" style="padding: 40px; font-family: Arial, sans-serif; text-align: center;">
+    <h2 style="margin-bottom: 30px; color: #006847;">Our Menu</h2>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #d52b1e;">Shakes</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Chocolate <span style="float:right;">₹___</span></li>
+          <li>Belgian Chocolate <span style="float:right;">₹___</span></li>
+          <li>Vanilla <span style="float:right;">₹___</span></li>
+          <li>Cookies and Cream <span style="float:right;">₹___</span></li>
+          <li>Banana Oats Shake <span style="float:right;">₹___</span></li>
+          <li>Strawberry Whey <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #009246;">Snacks</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Protein Bar <span style="float:right;">₹___</span></li>
+          <li>Protein Brownie <span style="float:right;">₹___</span></li>
+          <li>Oats Energy Bar <span style="float:right;">₹___</span></li>
+          <li>Peanut Butter Cookies <span style="float:right;">₹___</span></li>
+          <li>Greek Yogurt Bowl <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+
+      <div style="flex: 1 1 250px; max-width: 300px; border: 2px solid #006847; border-radius: 8px; padding: 20px;">
+        <h3 style="color: #000;">Creatines</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; line-height: 1.8;">
+          <li>Unflavoured <span style="float:right;">₹___</span></li>
+          <li>Fruit Fusion <span style="float:right;">₹___</span></li>
+          <li>Fruit Punch <span style="float:right;">₹___</span></li>
+          <li>Citrus Blast <span style="float:right;">₹___</span></li>
+          <li>Tropical Tango <span style="float:right;">₹___</span></li>
+          <li>Watermelon Kool Aid <span style="float:right;">₹___</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="text-align:center; font-family: Arial, sans-serif;">
+    <h2 style="margin-bottom: 20px; color: #000;">Contact Us</h2>
+    <p style="margin: 10px 0;">
+      <a href="https://www.instagram.com/protenzax" target="_blank" 
+         style="text-decoration: none; color: #E4405F; font-size: 18px;">
+         <i class="fab fa-instagram"></i> @protenzax
+      </a>
+    </p>
+    <p style="margin: 10px 0;">
+      <a href="mailto:info@protenzax.in" 
+         style="text-decoration: none; color: #25D366; font-size: 18px;">
+         <i class="fas fa-envelope"></i> info@protenzax.in
+      </a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 ProtenzaX | All Rights Reserved</p>
+  </footer>
+  
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("mySidebar");
+      const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
+
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        menuBtn.style.display = "block"; // show ☰ again
+      } else {
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        menuBtn.style.display = "none"; // hide ☰ while sidebar is open
+      }
+    }
+
+    function toggleAccountMenu() {
+      const dropdown = document.getElementById("accountDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logoutUser() {
+      alert("Logged out!");
+      document.getElementById("loginOption").style.display = "block";
+      document.getElementById("logoutOption").style.display = "none";
+    }
+
+    // Close account dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.account-icon') && !event.target.closest('.account-container')) {
+        const dropdown = document.getElementById("accountDropdown");
+        if (dropdown.style.display === "block") {
+          dropdown.style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
