@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+@layer utilities {
+  .text-shadow-neon {
+    text-shadow: 0 0 10px rgba(212, 255, 0, 0.5);
+  }
+}
