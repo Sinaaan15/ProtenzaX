@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Button from './Button';
 
@@ -9,6 +10,7 @@ const Navbar = ({ isLoggedIn }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+    const { toggleCart, cartCount } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,6 +56,20 @@ const Navbar = ({ isLoggedIn }) => {
                             {link.name}
                         </Link>
                     ))}
+
+                    <button
+                        onClick={toggleCart}
+                        className="relative text-zinc-300 hover:text-primary transition-colors p-2"
+                        aria-label="Shopping Cart"
+                    >
+                        <ShoppingBag size={20} />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-1 bg-primary text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                {cartCount}
+                            </span>
+                        )}
+                    </button>
+
                     <Button
                         variant="primary"
                         className="flex items-center gap-2"
@@ -65,12 +81,26 @@ const Navbar = ({ isLoggedIn }) => {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-white"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    {isMobileMenuOpen ? <X /> : <Menu />}
-                </button>
+                <div className="flex items-center gap-4 md:hidden">
+                    <button
+                        onClick={toggleCart}
+                        className="relative text-white p-2"
+                        aria-label="Shopping Cart"
+                    >
+                        <ShoppingBag size={24} />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-1 bg-primary text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                {cartCount}
+                            </span>
+                        )}
+                    </button>
+                    <button
+                        className="text-white"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X /> : <Menu />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu Overlay */}

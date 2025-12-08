@@ -19,21 +19,29 @@ const Layout = ({ children, isLoggedIn }) => {
   );
 };
 
+import { CartProvider } from './context/CartContext';
+import CartDrawer from './components/CartDrawer';
+
+// ... Layout definition ...
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <Router>
-      <div className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-black">
-        <Layout isLoggedIn={isLoggedIn}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
-            <Route path="/account" element={<Account onLogout={() => setIsLoggedIn(false)} />} />
-          </Routes>
-        </Layout>
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-black">
+          <CartDrawer />
+          <Layout isLoggedIn={isLoggedIn}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login onLogin={() => setIsLoggedIn(true)} />} />
+              <Route path="/account" element={<Account onLogout={() => setIsLoggedIn(false)} />} />
+            </Routes>
+          </Layout>
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

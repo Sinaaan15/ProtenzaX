@@ -45,7 +45,12 @@ const menuCategories = [
     }
 ];
 
+import { useCart } from '../context/CartContext';
+
 const MenuCard = ({ item, index }) => {
+    const { addToCart } = useCart();
+    // ... animation variants can stay or be simplified ...
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -70,6 +75,7 @@ const MenuCard = ({ item, index }) => {
                     </div>
                     <motion.button
                         whileTap={{ scale: 0.9 }}
+                        onClick={() => addToCart(item)}
                         className="w-8 h-8 rounded-full bg-primary text-black flex items-center justify-center hover:bg-white transition-colors shrink-0 ml-2"
                     >
                         <Plus size={18} />
