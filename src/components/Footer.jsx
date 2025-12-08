@@ -14,7 +14,7 @@ const Footer = () => {
                             Built by Dedication. Fueled by Protein. We are committed to providing the best nutrition for your fitness journey.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-primary hover:bg-zinc-800 transition-all">
+                            <a href="https://instagram.com/protenzax" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-primary hover:bg-zinc-800 transition-all">
                                 <Instagram size={20} />
                             </a>
                             <a href="mailto:info@protenzax.in" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-primary hover:bg-zinc-800 transition-all">
