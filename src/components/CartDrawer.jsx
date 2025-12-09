@@ -283,7 +283,7 @@ const CartDrawer = () => {
                                         </div>
                                         {tip > 0 && (
                                             <div className="flex justify-between text-zinc-400 text-xs">
-                                                <span>Delivery Tip</span>
+                                                <span>Tip</span>
                                                 <span>₹{tip}</span>
                                             </div>
                                         )}
