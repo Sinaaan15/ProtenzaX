@@ -23,6 +23,8 @@ export const CartProvider = ({ children }) => {
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [notification, setNotification] = useState(null); // { message: string, visible: boolean }
+    const [tip, setTip] = useState(0);
+    const [coupon, setCoupon] = useState(null); // { code: string, discount: number }
 
     useEffect(() => {
         try {
@@ -55,7 +57,6 @@ export const CartProvider = ({ children }) => {
             }
             return [...prev, { ...product, quantity: 1 }];
         });
-        // setIsCartOpen(true); // Removed auto-open behavior
         setNotification({ message: `Added ${product.name} to cart` });
     };
 
@@ -76,20 +77,28 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = () => {
         setCartItems([]);
+        setTip(0);
+        setCoupon(null);
     };
 
     const toggleCart = () => setIsCartOpen(prev => !prev);
     const openCart = () => setIsCartOpen(true);
     const closeNotification = () => setNotification(null);
 
-    // Derived state
-    const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
-    const cartTotal = cartItems.reduce((acc, item) => {
-        // Parse price string "₹180" -> 180
+    // Bill Calculations
+    const itemTotal = cartItems.reduce((acc, item) => {
         const price = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
         return acc + (price * item.quantity);
     }, 0);
+
+    const tax = Math.round(itemTotal * 0.05); // 5% Tax
+    const platformFee = itemTotal > 0 ? 20 : 0; // Flat fee if cart not empty
+    const discount = coupon ? Math.round(itemTotal * (coupon.discount / 100)) : 0;
+
+    // Ensure tip isn't applied if cart is empty, though UI should handle this
+    const appliedTip = itemTotal > 0 ? tip : 0;
+
+    const grandTotal = itemTotal + tax + platformFee + appliedTip - discount;
 
     return (
         <CartContext.Provider value={{
@@ -101,8 +110,19 @@ export const CartProvider = ({ children }) => {
             isCartOpen,
             toggleCart,
             openCart,
-            cartCount,
-            cartTotal,
+            cartCount: cartItems.reduce((acc, item) => acc + item.quantity, 0),
+            billDetails: {
+                itemTotal,
+                tax,
+                platformFee,
+                tip: appliedTip,
+                discount,
+                grandTotal
+            },
+            tip,
+            setTip,
+            coupon,
+            setCoupon,
             notification,
             closeNotification
         }}>
