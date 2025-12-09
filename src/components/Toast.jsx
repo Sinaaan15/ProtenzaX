@@ -24,16 +24,6 @@ const Toast = () => {
                     </p>
 
                     <button
-                        onClick={() => {
-                            openCart();
-                            closeNotification();
-                        }}
-                        className="text-xs font-bold bg-primary text-black px-3 py-1.5 rounded-lg hover:bg-white transition-colors shrink-0"
-                    >
-                        Go to Cart
-                    </button>
-
-                    <button
                         onClick={closeNotification}
                         className="text-zinc-500 hover:text-white transition-colors"
                     >

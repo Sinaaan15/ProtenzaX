@@ -22,6 +22,7 @@ const Layout = ({ children, isLoggedIn }) => {
 import { CartProvider } from './context/CartContext';
 import CartDrawer from './components/CartDrawer';
 import Toast from './components/Toast';
+import FloatingCartButton from './components/FloatingCartButton';
 
 // ... Layout definition ...
 
@@ -34,6 +35,7 @@ function App() {
         <div className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-black">
           <CartDrawer />
           <Toast />
+          <FloatingCartButton />
           <Layout isLoggedIn={isLoggedIn}>
             <Routes>
               <Route path="/" element={<Home />} />

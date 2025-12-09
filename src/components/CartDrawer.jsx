@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { X, Minus, Plus, Trash2, ShoppingBag, AlertTriangle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import Button from './Button';
 
@@ -11,8 +11,11 @@ const CartDrawer = () => {
         cartItems,
         cartTotal,
         updateQuantity,
-        removeFromCart
+        removeFromCart,
+        clearCart
     } = useCart();
+
+    const [showClearConfirm, setShowClearConfirm] = useState(false);
 
     return (
         <AnimatePresence>
@@ -57,45 +60,88 @@ const CartDrawer = () => {
                                     <p className="text-sm">Go add some protein!</p>
                                 </div>
                             ) : (
-                                cartItems.map((item) => (
-                                    <motion.div
-                                        layout
-                                        key={item.name}
-                                        className="flex gap-4 bg-black/40 p-4 rounded-xl border border-zinc-800/50"
-                                    >
-                                        <div className="flex-1">
-                                            <h3 className="text-white font-bold">{item.name}</h3>
-                                            <p className="text-primary text-sm font-medium">{item.price}</p>
-                                        </div>
-
-                                        <div className="flex flex-col items-end justify-between gap-2">
-                                            <button
-                                                onClick={() => removeFromCart(item.name)}
-                                                className="text-zinc-500 hover:text-red-500 transition-colors p-1"
-                                            >
-                                                <Trash2 size={16} />
-                                            </button>
-
-                                            <div className="flex items-center gap-3 bg-zinc-900 rounded-lg p-1 border border-zinc-800">
+                                <>
+                                    {showClearConfirm && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="bg-red-500/10 border border-red-500/50 rounded-xl p-4 mb-4"
+                                        >
+                                            <div className="flex items-center gap-2 text-red-500 font-bold mb-2">
+                                                <AlertTriangle size={18} />
+                                                Clear entire cart?
+                                            </div>
+                                            <div className="flex gap-2">
                                                 <button
-                                                    onClick={() => updateQuantity(item.name, -1)}
-                                                    className="w-6 h-6 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded transition-colors"
+                                                    onClick={() => {
+                                                        clearCart();
+                                                        setShowClearConfirm(false);
+                                                    }}
+                                                    className="flex-1 bg-red-500 text-white py-2 rounded-lg text-sm font-bold hover:bg-red-600 transition-colors"
                                                 >
-                                                    <Minus size={14} />
+                                                    Yes, Clear All
                                                 </button>
-                                                <span className="text-white text-sm font-bold min-w-[20px] text-center">
-                                                    {item.quantity}
-                                                </span>
                                                 <button
-                                                    onClick={() => updateQuantity(item.name, 1)}
-                                                    className="w-6 h-6 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded transition-colors"
+                                                    onClick={() => setShowClearConfirm(false)}
+                                                    className="flex-1 bg-zinc-800 text-zinc-300 py-2 rounded-lg text-sm font-medium hover:bg-zinc-700 transition-colors"
                                                 >
-                                                    <Plus size={14} />
+                                                    Cancel
                                                 </button>
                                             </div>
+                                        </motion.div>
+                                    )}
+
+                                    {!showClearConfirm && (
+                                        <div className="flex justify-end mb-2">
+                                            <button
+                                                onClick={() => setShowClearConfirm(true)}
+                                                className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition-colors"
+                                            >
+                                                <Trash2 size={12} /> Remove All
+                                            </button>
                                         </div>
-                                    </motion.div>
-                                ))
+                                    )}
+
+                                    {cartItems.map((item) => (
+                                        <motion.div
+                                            layout
+                                            key={item.name}
+                                            className="flex gap-4 bg-black/40 p-4 rounded-xl border border-zinc-800/50"
+                                        >
+                                            <div className="flex-1">
+                                                <h3 className="text-white font-bold">{item.name}</h3>
+                                                <p className="text-primary text-sm font-medium">{item.price}</p>
+                                            </div>
+
+                                            <div className="flex flex-col items-end justify-between gap-2">
+                                                <button
+                                                    onClick={() => removeFromCart(item.name)}
+                                                    className="text-zinc-500 hover:text-red-500 transition-colors p-1"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+
+                                                <div className="flex items-center gap-3 bg-zinc-900 rounded-lg p-1 border border-zinc-800">
+                                                    <button
+                                                        onClick={() => updateQuantity(item.name, -1)}
+                                                        className="w-6 h-6 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded transition-colors"
+                                                    >
+                                                        <Minus size={14} />
+                                                    </button>
+                                                    <span className="text-white text-sm font-bold min-w-[20px] text-center">
+                                                        {item.quantity}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => updateQuantity(item.name, 1)}
+                                                        className="w-6 h-6 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded transition-colors"
+                                                    >
+                                                        <Plus size={14} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </>
                             )}
                         </div>
 
