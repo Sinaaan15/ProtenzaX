@@ -1,0 +1,15 @@
+{
+    "name": "ProtenzaX",
+    "short_name": "ProtenzaX",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#09090b",
+    "theme_color": "#09090b",
+    "icons": [
+        {
+            "src": "/logo.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml"
+        }
+    ]
+}
