@@ -98,7 +98,7 @@ const CartDrawer = () => {
                                 <div className="h-full flex flex-col items-center justify-center text-center text-zinc-500">
                                     <ShoppingBag size={64} className="mb-6 opacity-20" />
                                     <p className="text-xl font-bold mb-2">Cart is empty</p>
-                                    <p className="text-sm">Start adding some fuel to your workout!</p>
+                                    <p className="text-sm">Add some Protein to your workout!</p>
                                 </div>
                             ) : (
                                 <div className="space-y-6">
