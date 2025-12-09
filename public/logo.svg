@@ -7,8 +7,8 @@
   </defs>
   
   <g transform="translate(50,50) rotate(45) translate(-50,-50)">
-    <!-- Vertical Barbell (will be diagonal due to group rotation) -->
-    <rect x="45" y="10" width="10" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="2" />
+    <!-- Vertical Barbell (Thinner Bar: Width 6, X 47) -->
+    <rect x="47" y="10" width="6" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
     <!-- Weights Top -->
     <rect x="35" y="10" width="30" height="10" rx="2" fill="url(#gymGradient)" />
     <rect x="40" y="22" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
@@ -18,8 +18,8 @@
   </g>
 
   <g transform="translate(50,50) rotate(-45) translate(-50,-50)">
-    <!-- Vertical Barbell (will be diagonal due to group rotation) -->
-    <rect x="45" y="10" width="10" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="2" />
+    <!-- Vertical Barbell (Thinner Bar: Width 6, X 47) -->
+    <rect x="47" y="10" width="6" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
     <!-- Weights Top -->
     <rect x="35" y="10" width="30" height="10" rx="2" fill="url(#gymGradient)" />
     <rect x="40" y="22" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
