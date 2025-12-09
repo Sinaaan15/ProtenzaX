@@ -50,6 +50,8 @@ const CartDrawer = () => {
         }
 
         let numVal = parseInt(val);
+        // Fix: Prevent negative values
+        if (isNaN(numVal) || numVal < 0) numVal = 0;
         if (numVal > 1000) numVal = 1000;
 
         setCustomTipValue(numVal.toString());
@@ -223,8 +225,8 @@ const CartDrawer = () => {
                                                         setCustomTipValue('');
                                                     }}
                                                     className={`px-4 py-2 rounded-lg text-sm font-bold border transition-all ${tip === amt
-                                                            ? 'bg-primary text-black border-primary'
-                                                            : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-700'
+                                                        ? 'bg-primary text-black border-primary'
+                                                        : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-700'
                                                         }`}
                                                 >
                                                     ₹{amt}
@@ -242,8 +244,8 @@ const CartDrawer = () => {
                                                     }
                                                 }}
                                                 className={`px-4 py-2 rounded-lg text-sm font-bold border transition-all ${customTipOpen
-                                                        ? 'bg-zinc-800 text-white border-zinc-700'
-                                                        : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-700'
+                                                    ? 'bg-zinc-800 text-white border-zinc-700'
+                                                    : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-700'
                                                     }`}
                                             >
                                                 Other
@@ -253,6 +255,7 @@ const CartDrawer = () => {
                                             <div className="flex gap-2 animate-in fade-in slide-in-from-top-2">
                                                 <input
                                                     type="number"
+                                                    min="0"
                                                     max="1000"
                                                     placeholder="Enter amount (Max ₹1000)"
                                                     className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary/50"
@@ -311,11 +314,13 @@ const CartDrawer = () => {
                         {/* Footer / Checkout Button */}
                         {cartItems.length > 0 && (
                             <div className="p-6 border-t border-zinc-800 bg-black/40 backdrop-blur-md">
-                                <Button variant="primary" className="w-full justify-between py-4 text-base group px-6">
-                                    <span className="font-bold text-black">₹{billDetails.grandTotal}</span>
-                                    <span className="flex items-center gap-2 text-black">
-                                        Proceed to Pay <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                <Button variant="primary" className="w-full justify-center py-4 text-base group px-6 relative">
+                                    <span className="font-bold text-black flex items-center">
+                                        ₹{billDetails.grandTotal}
+                                        <span className="mx-3 opacity-50">|</span>
+                                        Proceed to Pay
                                     </span>
+                                    <ChevronRight size={18} className="text-black ml-2 group-hover:translate-x-1 transition-transform absolute right-6" />
                                 </Button>
                             </div>
                         )}
