@@ -5,26 +5,29 @@
       <stop offset="100%" style="stop-color:#A3D900;stop-opacity:1" />
     </linearGradient>
   </defs>
+
+  <!-- Dark Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#09090b" stroke="url(#gymGradient)" stroke-width="1.5" />
   
   <g transform="translate(50,50) rotate(35) translate(-50,-50)">
     <!-- Vertical Barbell (Thinner Bar width 6) -->
-    <rect x="47" y="10" width="6" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
+    <rect x="47" y="15" width="6" height="70" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
     <!-- Weights Top -->
-    <rect x="35" y="10" width="30" height="10" rx="2" fill="url(#gymGradient)" />
-    <rect x="40" y="22" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
+    <rect x="35" y="15" width="30" height="8" rx="2" fill="url(#gymGradient)" />
+    <rect x="40" y="25" width="20" height="4" rx="1" fill="url(#gymGradient)" opacity="0.8" />
     <!-- Weights Bottom -->
-    <rect x="35" y="80" width="30" height="10" rx="2" fill="url(#gymGradient)" />
-    <rect x="40" y="73" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
+    <rect x="35" y="77" width="30" height="8" rx="2" fill="url(#gymGradient)" />
+    <rect x="40" y="71" width="20" height="4" rx="1" fill="url(#gymGradient)" opacity="0.8" />
   </g>
 
   <g transform="translate(50,50) rotate(-35) translate(-50,-50)">
     <!-- Vertical Barbell -->
-    <rect x="47" y="10" width="6" height="80" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
+    <rect x="47" y="15" width="6" height="70" rx="2" fill="#333" stroke="url(#gymGradient)" stroke-width="1.5" />
     <!-- Weights Top -->
-    <rect x="35" y="10" width="30" height="10" rx="2" fill="url(#gymGradient)" />
-    <rect x="40" y="22" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
+    <rect x="35" y="15" width="30" height="8" rx="2" fill="url(#gymGradient)" />
+    <rect x="40" y="25" width="20" height="4" rx="1" fill="url(#gymGradient)" opacity="0.8" />
     <!-- Weights Bottom -->
-    <rect x="35" y="80" width="30" height="10" rx="2" fill="url(#gymGradient)" />
-    <rect x="40" y="73" width="20" height="5" rx="1" fill="url(#gymGradient)" opacity="0.8" />
+    <rect x="35" y="77" width="30" height="8" rx="2" fill="url(#gymGradient)" />
+    <rect x="40" y="71" width="20" height="4" rx="1" fill="url(#gymGradient)" opacity="0.8" />
   </g>
 </svg>
