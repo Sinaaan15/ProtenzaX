@@ -13,7 +13,7 @@ const Toast = () => {
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] flex items-center gap-4 bg-zinc-900 border border-zinc-800 text-white px-4 py-3 rounded-xl shadow-2xl max-w-sm w-full mx-4 sm:w-auto"
+                    className="fixed bottom-4 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-[80] flex items-center gap-4 bg-zinc-900 border border-zinc-800 text-white px-4 py-3 rounded-xl shadow-2xl md:min-w-[300px]"
                 >
                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                         <Check size={16} />

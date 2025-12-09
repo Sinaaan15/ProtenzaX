@@ -19,14 +19,13 @@ const FloatingCartButton = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={openCart}
-                    className="fixed bottom-6 right-6 z-[40] bg-primary text-black w-16 h-16 rounded-full shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-white transition-colors"
+                    className="fixed bottom-6 right-6 z-[40] bg-primary text-black px-6 py-3 rounded-full shadow-lg shadow-primary/30 flex items-center gap-2 font-bold hover:bg-white transition-colors"
                 >
-                    <div className="relative">
-                        <ShoppingBag size={28} strokeWidth={2.5} />
-                        <span className="absolute -top-2 -right-2 bg-black text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                            {cartCount}
-                        </span>
-                    </div>
+                    <ShoppingBag size={20} strokeWidth={2.5} />
+                    <span>View Cart</span>
+                    <span className="bg-black text-white text-xs font-bold px-2 py-0.5 rounded-full flex items-center justify-center min-w-[20px]">
+                        {cartCount}
+                    </span>
                 </motion.button>
             )}
         </AnimatePresence>
