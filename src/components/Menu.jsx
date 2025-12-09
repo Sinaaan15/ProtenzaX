@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Coffee, Cookie, Zap } from 'lucide-react';
+import { Plus, Minus, Coffee, Cookie, Zap } from 'lucide-react';
 import Button from './Button';
 
 // Data sourced from protenzax.in
@@ -48,8 +48,11 @@ const menuCategories = [
 import { useCart } from '../context/CartContext';
 
 const MenuCard = ({ item, index }) => {
-    const { addToCart } = useCart();
-    // ... animation variants can stay or be simplified ...
+    const { addToCart, cartItems, updateQuantity, removeFromCart } = useCart();
+
+    // Check if item is in cart
+    const cartItem = cartItems.find(c => c.name === item.name);
+    const quantity = cartItem ? cartItem.quantity : 0;
 
     return (
         <motion.div
@@ -57,7 +60,8 @@ const MenuCard = ({ item, index }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-primary/50 transition-all group flex flex-col h-full"
+            className={`bg-zinc-900 border rounded-xl overflow-hidden transition-all group flex flex-col h-full ${quantity > 0 ? 'border-primary/50 ring-1 ring-primary/20' : 'border-zinc-800 hover:border-primary/50'
+                }`}
         >
             <div className="p-5 flex-1 flex flex-col">
                 <div className="flex justify-between items-start mb-2">
@@ -73,13 +77,45 @@ const MenuCard = ({ item, index }) => {
                             </span>
                         ))}
                     </div>
-                    <motion.button
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => addToCart(item)}
-                        className="w-8 h-8 rounded-full bg-primary text-black flex items-center justify-center hover:bg-white transition-colors shrink-0 ml-2"
-                    >
-                        <Plus size={18} />
-                    </motion.button>
+
+                    <div className="ml-2">
+                        {quantity > 0 ? (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="flex items-center gap-2 bg-primary text-black rounded-lg px-2 py-1"
+                            >
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (quantity === 1) removeFromCart(item.name);
+                                        else updateQuantity(item.name, -1);
+                                    }}
+                                    className="p-1 hover:bg-black/10 rounded-md transition-colors"
+                                >
+                                    <Minus size={14} strokeWidth={3} />
+                                </button>
+                                <span className="font-bold text-sm min-w-[12px] text-center">{quantity}</span>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        updateQuantity(item.name, 1);
+                                    }}
+                                    className="p-1 hover:bg-black/10 rounded-md transition-colors"
+                                >
+                                    <Plus size={14} strokeWidth={3} />
+                                </button>
+                            </motion.div>
+                        ) : (
+                            <motion.button
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => addToCart(item)}
+                                className="w-8 h-8 rounded-full bg-primary text-black flex items-center justify-center hover:bg-white transition-colors shrink-0"
+                            >
+                                <Plus size={18} />
+                            </motion.button>
+                        )}
+                    </div>
                 </div>
             </div>
         </motion.div>
